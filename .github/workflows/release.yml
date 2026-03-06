@@ -2,20 +2,21 @@ name: Release
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - main
+      - master
   workflow_dispatch:
     inputs:
       release_tag:
         description: "Release tag to publish, e.g. v0.1.0"
-        required: true
+        required: false
         type: string
 
 permissions:
   contents: write
 
 concurrency:
-  group: release-${{ github.event_name == 'workflow_dispatch' && inputs.release_tag || github.ref_name }}
+  group: release-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -23,19 +24,58 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       release_tag: ${{ steps.meta.outputs.release_tag }}
+      should_release: ${{ steps.meta.outputs.should_release }}
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Resolve release metadata
         id: meta
         shell: bash
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "release_tag=${{ inputs.release_tag }}" >> "$GITHUB_OUTPUT"
+            if [ -n "${{ inputs.release_tag }}" ]; then
+              RELEASE_TAG="${{ inputs.release_tag }}"
+            else
+              RELEASE_TAG="v$(node -p "require('./package.json').version")"
+            fi
           else
-            echo "release_tag=${GITHUB_REF_NAME}" >> "$GITHUB_OUTPUT"
+            RELEASE_TAG="v$(node -p "require('./package.json').version")"
           fi
 
+          PACKAGE_VERSION="$(node -p "require('./package.json').version")"
+          TAURI_VERSION="$(node -p "require('./src-tauri/tauri.conf.json').version")"
+
+          if [ "$PACKAGE_VERSION" != "$TAURI_VERSION" ]; then
+            echo "package.json version ($PACKAGE_VERSION) does not match src-tauri/tauri.conf.json version ($TAURI_VERSION)" >&2
+            exit 1
+          fi
+
+          git fetch --tags --force
+
+          echo "release_tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          if git rev-parse "$RELEASE_TAG" >/dev/null 2>&1; then
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create release tag
+        if: steps.meta.outputs.should_release == 'true'
+        env:
+          RELEASE_TAG: ${{ steps.meta.outputs.release_tag }}
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag "$RELEASE_TAG" "$GITHUB_SHA"
+          git push origin "$RELEASE_TAG"
+
       - name: Create or reuse GitHub release
+        if: steps.meta.outputs.should_release == 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ steps.meta.outputs.release_tag }}
@@ -50,6 +90,7 @@ jobs:
 
   desktop:
     needs: prepare-release
+    if: needs.prepare-release.outputs.should_release == 'true'
     strategy:
       fail-fast: false
       matrix:
@@ -114,6 +155,7 @@ jobs:
     needs:
       - prepare-release
       - desktop
+    if: needs.prepare-release.outputs.should_release == 'true'
     runs-on: ubuntu-24.04
 
     steps:
