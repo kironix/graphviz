@@ -44,8 +44,8 @@ jobs:
           if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             gh release create "$RELEASE_TAG" \
               --title "GraphViz $RELEASE_TAG" \
-              --notes "Automated multi-platform release for $RELEASE_TAG" \
-              --draft
+              --notes "Automated release for Windows, macOS, Linux, and Android." \
+              --latest
           fi
 
   desktop:
@@ -101,8 +101,11 @@ jobs:
         with:
           tagName: ${{ needs.prepare-release.outputs.release_tag }}
           releaseName: GraphViz ${{ needs.prepare-release.outputs.release_tag }}
-          releaseBody: Desktop bundles for ${{ needs.prepare-release.outputs.release_tag }}
-          releaseDraft: true
+          releaseBody: |
+            Cross-platform release for Windows, macOS, Linux, and Android.
+
+            Tag: ${{ needs.prepare-release.outputs.release_tag }}
+          releaseDraft: false
           prerelease: false
           includeUpdaterJson: false
           tauriScript: bun run tauri
@@ -170,8 +173,12 @@ jobs:
         shell: bash
         run: |
           mkdir -p release-assets/android
-          find src-tauri/gen/android/app/build/outputs \
-            \( -name "*.apk" -o -name "*.aab" \) \
-            -type f \
-            -exec cp {} release-assets/android/ \;
+          while IFS= read -r source; do
+            filename="$(basename "$source")"
+            cp "$source" "release-assets/android/graphviz-android-$filename"
+          done < <(
+            find src-tauri/gen/android/app/build/outputs \
+              \( -name "*.apk" -o -name "*.aab" \) \
+              -type f | sort
+          )
           gh release upload "$RELEASE_TAG" release-assets/android/* --clobber
