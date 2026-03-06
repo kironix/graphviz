@@ -61,6 +61,8 @@ export function ShortcutHelpDialog({
             size="icon"
             aria-label="Show shortcuts help"
             className={className}
+            tooltip="Keyboard shortcuts"
+            tooltipProps={{ side: "bottom" }}
           >
             <CircleHelp className="h-5 w-5" />
           </Button>

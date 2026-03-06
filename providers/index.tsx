@@ -1,5 +1,7 @@
 import { ThemeProvider } from "@/providers/theme-provider"
 
+import { TooltipProvider } from "@/components/ui/tooltip"
+
 export function Providers({
   children,
 }: Readonly<{
@@ -11,7 +13,9 @@ export function Providers({
       defaultTheme="light"
       disableTransitionOnChange
     >
-      <main>{children}</main>
+      <TooltipProvider>
+        <main>{children}</main>
+      </TooltipProvider>
     </ThemeProvider>
   )
 }

@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { Config } from "@/config"
 import {
   DEFAULT_CONFIG,
   EDITOR_DIRECTIONS,
@@ -15,6 +16,7 @@ import {
   Code2,
   Download,
   HouseHeart,
+  Network,
   Redo2,
   Settings,
   SlidersHorizontal,
@@ -79,12 +81,29 @@ export function MobileLayout({
     isDefaultConfig
 
   return (
-    <div className="bg-background flex h-dvh flex-col">
+    <div className="bg-background relative flex h-dvh flex-col overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-56 bg-[radial-gradient(circle_at_top,oklch(0.6218_0.1029_214.69/0.16),transparent_60%)]" />
       <div className="relative min-h-0 flex-1 overflow-hidden">
+        <div className="border-border/60 bg-background/88 absolute top-3 right-3 left-3 z-40 flex items-center justify-between rounded-2xl border px-4 py-3 shadow-[0_14px_36px_rgba(15,23,42,0.12)] backdrop-blur">
+          <div className="flex min-w-0 items-center gap-3">
+            <div className="bg-primary/12 text-primary flex size-9 items-center justify-center rounded-xl">
+              <Network className="h-4 w-4" />
+            </div>
+            <div className="min-w-0">
+              <p className="truncate text-sm font-semibold">{Config.title}</p>
+              <p className="text-muted-foreground text-[11px] tracking-[0.22em] uppercase">
+                Mobile workspace
+              </p>
+            </div>
+          </div>
+          <div className="text-muted-foreground rounded-full border px-3 py-1 text-[11px] uppercase tracking-[0.2em]">
+            {mode}
+          </div>
+        </div>
         <div className="h-full w-full">
           <GraphCanvas />
         </div>
-        <div className="border-border bg-background/90 absolute bottom-3 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 rounded-full border px-3 py-1.5 shadow-lg backdrop-blur-sm">
+        <div className="border-border/60 bg-background/90 absolute right-3 bottom-3 left-3 z-40 flex items-center justify-center gap-1 rounded-[1.6rem] border px-3 py-2 shadow-[0_18px_42px_rgba(15,23,42,0.18)] backdrop-blur-sm">
           <Link
             href="/"
             className={buttonVariants({ variant: "ghost", size: "icon" })}

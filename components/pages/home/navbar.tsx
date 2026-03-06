@@ -52,9 +52,6 @@ export function Navbar() {
               <span className="text-base font-semibold tracking-tight sm:text-lg">
                 {Config.title}
               </span>
-              <span className="text-muted-foreground hidden rounded-full border px-2 py-0.5 text-[10px] font-medium tracking-[0.2em] uppercase md:inline-flex">
-                Desktop
-              </span>
             </div>
             <p className="text-muted-foreground hidden text-xs sm:block">
               Local-first graph workspace

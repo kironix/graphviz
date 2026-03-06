@@ -1,7 +1,7 @@
 "use client"
 
 import { EDITOR_MODES, TABLET_SHEET_COPY, useGraphStore } from "@/utils"
-import { SlidersHorizontal } from "lucide-react"
+import { Code2, Network, SlidersHorizontal } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -30,24 +30,53 @@ export function TabletLayout({
   const { mode, actions } = useGraphStore()
 
   return (
-    <div className="bg-background flex h-screen flex-col overflow-hidden">
-      <GraphToolbar />
-      <div className="flex min-h-0 flex-1 overflow-hidden">
-        <div className="border-border w-52 shrink-0 overflow-auto border-r p-3 md:w-64">
-          <GraphTextEditor />
-        </div>
-        <div className="relative flex min-w-0 flex-1 flex-col">
-          <div className="border-border m-2 min-h-0 flex-1 overflow-hidden rounded-lg border">
-            <GraphCanvas />
+    <div className="bg-background relative flex h-screen flex-col overflow-hidden p-3">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,oklch(0.6218_0.1029_214.69/0.12),transparent_40%)]" />
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col">
+        <GraphToolbar />
+        <div className="grid min-h-0 flex-1 grid-cols-[16rem_minmax(0,1fr)] gap-3 pt-3">
+          <div className="border-border/60 bg-card/75 flex min-h-0 flex-col overflow-hidden rounded-[1.7rem] border shadow-[0_18px_40px_rgba(15,23,42,0.08)]">
+            <div className="border-border/60 flex items-center gap-2 border-b px-4 py-3">
+              <Code2 className="text-primary h-4 w-4" />
+              <div>
+                <p className="text-sm font-semibold">Edge List</p>
+                <p className="text-muted-foreground text-xs">
+                  Edit graph structure directly
+                </p>
+              </div>
+            </div>
+            <div className="min-h-0 flex-1 overflow-auto p-3">
+              <GraphTextEditor />
+            </div>
           </div>
-          <Button
-            size="icon"
-            className="absolute right-4 bottom-4 z-30 h-10 w-10 rounded-full shadow-lg"
-            onClick={() => setRightOpen(true)}
-            aria-label="Open config panel"
-          >
-            <SlidersHorizontal className="h-4 w-4" />
-          </Button>
+          <div className="relative flex min-w-0 flex-col">
+            <div className="border-border/60 bg-card/70 flex min-h-0 flex-1 flex-col overflow-hidden rounded-[1.9rem] border shadow-[0_18px_44px_rgba(15,23,42,0.09)]">
+              <div className="border-border/60 flex items-center justify-between border-b px-4 py-3">
+                <div className="flex items-center gap-2">
+                  <Network className="text-primary h-4 w-4" />
+                  <div>
+                    <p className="text-sm font-semibold">Canvas</p>
+                    <p className="text-muted-foreground text-xs">
+                      Interactive graph workspace
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div className="min-h-0 flex-1 p-3">
+                <div className="h-full overflow-hidden rounded-[1.3rem] border border-slate-200/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.78),rgba(248,250,252,0.82))] dark:border-slate-800 dark:bg-[linear-gradient(180deg,rgba(2,6,23,0.72),rgba(15,23,42,0.82))]">
+                  <GraphCanvas />
+                </div>
+              </div>
+            </div>
+            <Button
+              size="icon"
+              className="absolute right-4 bottom-4 z-30 h-11 w-11 rounded-full shadow-lg"
+              onClick={() => setRightOpen(true)}
+              aria-label="Open config panel"
+            >
+              <SlidersHorizontal className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
       <Sheet open={rightOpen} onOpenChange={setRightOpen}>

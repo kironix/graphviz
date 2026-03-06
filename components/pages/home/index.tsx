@@ -117,9 +117,9 @@ export function Home() {
     <div className="bg-background min-h-screen">
       <Navbar />
       <main className="relative overflow-hidden px-6 pt-24 pb-12 sm:px-8">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-[34rem] bg-[radial-gradient(circle_at_top,oklch(0.6218_0.1029_214.69_/_0.16),transparent_55%)]" />
-        <div className="pointer-events-none absolute top-28 left-[-5rem] h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
-        <div className="pointer-events-none absolute right-[-4rem] bottom-20 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-136 bg-[radial-gradient(circle_at_top,oklch(0.6218_0.1029_214.69/0.16),transparent_55%)]" />
+        <div className="pointer-events-none absolute top-28 -left-20 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
+        <div className="pointer-events-none absolute -right-16 bottom-20 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl" />
 
         <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-8">
           <section className="grid gap-6 xl:grid-cols-[minmax(0,1.2fr)_22rem]">
@@ -127,15 +127,15 @@ export function Home() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45 }}
-              className="border-border/60 from-background via-background to-primary/5 relative overflow-hidden rounded-[2rem] border bg-linear-to-br p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-8"
+              className="border-border/60 from-background via-background to-primary/5 relative overflow-hidden rounded-4xl border bg-linear-to-br p-6 shadow-[0_24px_80px_rgba(15,23,42,0.08)] sm:p-8"
             >
               <div className="mb-6 flex items-center gap-2 text-[11px] font-semibold tracking-[0.28em] text-cyan-700 uppercase">
                 <Sparkles className="size-3.5" />
-                Graph desktop workspace
+                Graph workspace
               </div>
               <div className="max-w-3xl">
                 <h1 className="text-4xl font-semibold tracking-tight sm:text-5xl xl:text-6xl">
-                  GraphViz feels like an app the moment it opens.
+                  {Config.title} feels like an app the moment it opens.
                 </h1>
                 <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-7 sm:text-lg">
                   Start on a real workspace, inspect the graph canvas, edit edge
@@ -167,7 +167,7 @@ export function Home() {
               {quickFacts.map((item) => (
                 <div
                   key={item.label}
-                  className="border-border/60 bg-card/70 rounded-[1.5rem] border p-5 shadow-sm backdrop-blur"
+                  className="border-border/60 bg-card/70 rounded-3xl border p-5 shadow-sm backdrop-blur"
                 >
                   <div className="bg-primary/12 text-primary mb-4 flex size-10 items-center justify-center rounded-xl">
                     <item.icon className="size-4.5" />
@@ -187,7 +187,7 @@ export function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.12 }}
-            className="border-border/60 bg-card/50 overflow-hidden rounded-[2rem] border shadow-[0_24px_80px_rgba(15,23,42,0.1)]"
+            className="border-border/60 bg-card/50 overflow-hidden rounded-4xl border shadow-[0_24px_80px_rgba(15,23,42,0.1)]"
           >
             <div className="border-border/60 bg-background/85 flex items-center justify-between border-b px-4 py-3 backdrop-blur sm:px-5">
               <div className="flex items-center gap-3">
@@ -206,7 +206,7 @@ export function Home() {
               </div>
             </div>
 
-            <div className="grid min-h-[42rem] xl:grid-cols-[16rem_minmax(0,1fr)_20rem]">
+            <div className="grid min-h-168 xl:grid-cols-[16rem_minmax(0,1fr)_20rem]">
               <aside className="border-border/60 bg-background/70 hidden border-r p-4 xl:block">
                 <div className="space-y-4">
                   <div className="rounded-2xl border border-cyan-100 bg-cyan-50/80 p-4 dark:border-cyan-950 dark:bg-cyan-950/20">
@@ -263,7 +263,7 @@ export function Home() {
                 </div>
               </aside>
 
-              <div className="bg-background/55 border-border/60 flex min-h-[26rem] flex-col border-r">
+              <div className="bg-background/55 border-border/60 flex min-h-104 flex-col border-r">
                 <div className="border-border/60 flex items-center justify-between border-b px-4 py-3">
                   <div>
                     <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase dark:text-slate-400">
@@ -284,7 +284,7 @@ export function Home() {
                 </div>
               </div>
 
-              <aside className="bg-card/55 flex min-h-[26rem] flex-col">
+              <aside className="bg-card/55 flex min-h-104 flex-col">
                 <div className="border-border/60 border-b px-4 py-3">
                   <p className="text-xs font-semibold tracking-[0.22em] text-slate-500 uppercase dark:text-slate-400">
                     Edge editor

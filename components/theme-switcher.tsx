@@ -23,6 +23,8 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
       variant="ghost"
       className="group/toggle h-8 w-8 px-0"
       onClick={toggleTheme}
+      tooltip="Toggle theme"
+      tooltipProps={{ side: "bottom" }}
     >
       <SunIcon className={cn("hidden [html.dark_&]:block", className)} />
       <MoonIcon className={cn("hidden [html.light_&]:block", className)} />
