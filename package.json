@@ -12,7 +12,7 @@
     "tauri:check": "cargo check --manifest-path src-tauri/Cargo.toml",
     "tauri:build": "tauri build",
     "tauri:android:init": "tauri android init --ci --skip-targets-install",
-    "tauri:android:build": "tauri android build --ci --apk --aab --split-per-abi",
+    "tauri:android:build": "tauri android build --ci --apk",
     "check": "bun run lint && bun run build && bun run tauri:check",
     "format": "prettier --write \"**/*.{ts,tsx,js,json,css}\"",
     "upgrade": "bunx --bun ncu -u && bun install",
