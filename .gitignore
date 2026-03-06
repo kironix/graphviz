@@ -1,10 +1,5 @@
 # dependencies
 /node_modules/
-/package-lock.json
-/npm-shrinkwrap.json
-/yarn.lock
-/pnpm-lock.yaml
-/bun.lock
 /.pnp
 .pnp.*
 .yarn/*
@@ -56,7 +51,3 @@ Thumbs.db
 
 # local certificates / keys
 *.pem
-
-bun.lockb
-bun.lock
-package-lock.json

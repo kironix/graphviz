@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { useTheme } from "next-themes"
 import { HexColorPicker } from "react-colorful"
 
 import { cn } from "@/lib/utils"
@@ -25,7 +24,6 @@ function ColorPicker({
   className,
 }: ColorPickerProps) {
   const [open, setOpen] = React.useState(false)
-  const { resolvedTheme } = useTheme()
 
   const resolvedHex = React.useMemo(() => {
     if (typeof window === "undefined") return "#000000"
@@ -54,7 +52,7 @@ function ColorPicker({
     const [r, g, b] = ctx.getImageData(0, 0, 1, 1).data
     const toHex = (n: number) => n.toString(16).padStart(2, "0")
     return `#${toHex(r)}${toHex(g)}${toHex(b)}`
-  }, [value, resolvedTheme])
+  }, [value])
 
   return (
     <Popover open={open} onOpenChange={setOpen}>

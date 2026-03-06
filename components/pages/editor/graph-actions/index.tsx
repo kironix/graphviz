@@ -43,6 +43,7 @@ export function GraphActions() {
   const [importError, setImportError] = React.useState<string | null>(null)
   const [isDragOverImport, setIsDragOverImport] = React.useState(false)
   const importFileInputRef = React.useRef<HTMLInputElement | null>(null)
+  const isEmpty = nodes.length === 0
 
   const resolveColor = React.useCallback((color: string) => {
     if (typeof window === "undefined") return color
@@ -309,6 +310,7 @@ export function GraphActions() {
     customLabels,
     canvasSize,
     copyText,
+    isEmpty,
   ])
 
   const handleExportJSON = React.useCallback(() => {
@@ -344,6 +346,7 @@ export function GraphActions() {
     config,
     customLabels,
     canvasSize,
+    isEmpty,
     normalizeToHex,
   ])
 
@@ -442,8 +445,6 @@ export function GraphActions() {
     const timer = setTimeout(() => setShareStatus("idle"), 2000)
     return () => clearTimeout(timer)
   }, [shareStatus])
-
-  const isEmpty = nodes.length === 0
 
   return (
     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

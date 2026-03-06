@@ -15,7 +15,7 @@ import { Home, Network, Redo2, Trash2, Undo2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { useIsDesktop, useIsMobile } from "@/hooks/use-mobile"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Button } from "@/components/ui/button"
 import { AlertDialogHelper } from "@/components/alert-dialog-helper"
 import { GraphSearchControls } from "@/components/pages/editor/graph-search-controls"
 import { ShortcutHelpDialog } from "@/components/pages/editor/shortcut-help-dialog"

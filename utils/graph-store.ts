@@ -857,12 +857,9 @@ export function useGraphStore(): GraphState & {
 }
 
 export function useGraphSelector<T>(selector: (state: GraphState) => T): T {
-  const selectorRef = React.useRef(selector)
-  selectorRef.current = selector
-
   const getSnapshot = React.useCallback(() => {
-    return selectorRef.current(graphStore.getState())
-  }, [])
+    return selector(graphStore.getState())
+  }, [selector])
 
   return React.useSyncExternalStore(
     graphStore.subscribe,

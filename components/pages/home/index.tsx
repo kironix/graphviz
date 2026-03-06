@@ -17,7 +17,6 @@ import { motion } from "motion/react"
 
 import { graphStore, HOME_DEMO_EDGES, HOME_DEMO_NODES } from "@/utils"
 
-import { InstallAppPrompt } from "@/components/install-app-prompt"
 import { Navbar } from "@/components/pages/home/navbar"
 import { GraphCanvas } from "@/components/pages/editor/graph-canvas"
 import { GraphTextEditor } from "@/components/pages/editor/graph-text-editor"
@@ -303,7 +302,6 @@ export function Home() {
           </motion.section>
         </div>
       </main>
-      <InstallAppPrompt />
       <ScrollToTop />
     </div>
   )
