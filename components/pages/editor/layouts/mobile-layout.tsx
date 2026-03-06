@@ -107,19 +107,22 @@ export function MobileLayout({
           <GraphCanvas />
         </div>
         <div
-          className="border-border/60 bg-background/90 absolute left-1/2 z-40 flex w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 items-center justify-center gap-1 rounded-[1.6rem] border px-3 py-2 shadow-[0_18px_42px_rgba(15,23,42,0.18)] backdrop-blur-sm"
+          className="border-border/50 bg-background/75 absolute left-1/2 z-40 flex w-max max-w-[calc(100%-1.5rem)] -translate-x-1/2 items-center justify-center gap-1 rounded-full border px-2.5 py-2 shadow-[0_22px_44px_rgba(15,23,42,0.18)] backdrop-blur-2xl"
           style={{ bottom: "calc(env(safe-area-inset-bottom, 0px) + 0.75rem)" }}
         >
           <Link
             href="/"
-            className={buttonVariants({ variant: "ghost", size: "icon" })}
+            className={cn(
+              buttonVariants({ variant: "ghost", size: "icon-lg" }),
+              "bg-primary text-primary-foreground hover:text-primary-foreground hover:bg-primary/92 size-11 rounded-full shadow-[0_10px_24px_rgba(14,165,233,0.3)]"
+            )}
           >
             <HouseHeart className="h-5 w-5" />
           </Link>
           <Button
             variant="ghost"
             size="icon"
-            className="h-10 w-10"
+            className="text-muted-foreground hover:text-muted-foreground hover:bg-background/85 size-11 rounded-full"
             onClick={() => setOptionsOpen(true)}
             aria-label="Graph options"
           >
@@ -128,7 +131,7 @@ export function MobileLayout({
           <Button
             variant="ghost"
             size="icon"
-            className="h-10 w-10"
+            className="text-muted-foreground hover:text-muted-foreground hover:bg-background/85 size-11 rounded-full"
             onClick={() => setLeftOpen(true)}
             aria-label="Open text editor"
           >
@@ -137,7 +140,7 @@ export function MobileLayout({
           <Button
             variant="ghost"
             size="icon"
-            className="h-10 w-10"
+            className="text-muted-foreground hover:text-muted-foreground hover:bg-background/85 size-11 rounded-full"
             onClick={() => setRightOpen(true)}
             aria-label="Open config"
           >
@@ -146,13 +149,15 @@ export function MobileLayout({
           <Button
             variant="ghost"
             size="icon"
-            className="h-10 w-10"
+            className="text-muted-foreground hover:text-muted-foreground hover:bg-background/85 size-11 rounded-full"
             onClick={() => setActionsOpen(true)}
             aria-label="Export actions"
           >
             <Download className="h-5 w-5" />
           </Button>
-          <ThemeSwitcher />
+          <ThemeSwitcher
+            buttonClassName="text-muted-foreground hover:text-muted-foreground hover:bg-background/85 size-11 rounded-full"
+          />
         </div>
       </div>
       <DialogHelper

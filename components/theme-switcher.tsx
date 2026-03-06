@@ -9,9 +9,13 @@ import { Button } from "@/components/ui/button"
 
 interface ThemeSwitcherProps {
   className?: string
+  buttonClassName?: string
 }
 
-export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
+export function ThemeSwitcher({
+  className,
+  buttonClassName,
+}: ThemeSwitcherProps) {
   const { setTheme, resolvedTheme } = useTheme()
 
   const toggleTheme = React.useCallback(() => {
@@ -21,7 +25,7 @@ export function ThemeSwitcher({ className }: ThemeSwitcherProps) {
   return (
     <Button
       variant="ghost"
-      className="group/toggle h-8 w-8 px-0"
+      className={cn("group/toggle h-8 w-8 px-0", buttonClassName)}
       onClick={toggleTheme}
       tooltip="Toggle theme"
       tooltipProps={{ side: "bottom" }}
