@@ -7,13 +7,10 @@ import { Command, NetworkIcon, Play } from "lucide-react"
 import { motion } from "motion/react"
 
 import { cn } from "@/lib/utils"
-import { useAnchorScroll } from "@/hooks/use-anchor-scroll"
 import { ThemeSwitcher } from "@/components/theme-switcher"
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false)
-
-  const { scrollToId } = useAnchorScroll()
 
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20)
@@ -39,11 +36,7 @@ export function Navbar() {
           scrolled ? "bg-background/88" : "bg-background/72"
         )}
       >
-        <Link
-          href="/"
-          onClick={() => scrollToId("hero")}
-          className="group flex items-center gap-2.5"
-        >
+        <Link href="/" className="group flex items-center gap-2.5">
           <div className="bg-primary/15 border-primary/20 group-hover:bg-primary/25 flex h-9 w-9 items-center justify-center rounded-xl border transition-colors">
             <NetworkIcon className="text-primary size-4.5" />
           </div>

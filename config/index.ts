@@ -23,7 +23,6 @@ const siteConfig = {
     name: "Toufiq Hasan Kiron",
     email: "hello@kiron.dev",
   },
-  ogImage: "/root.png",
   keys: {
     storageKey: `${title.toLowerCase().replace(" ", "-")}-state-v1`,
     installPrompt: `${title.toLowerCase().replace(" ", "-")}-install-prompt`,
