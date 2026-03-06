@@ -24,11 +24,12 @@ export function Navbar() {
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
       className={cn(
-        "fixed top-0 right-0 left-0 z-50 px-4 pt-4 transition-all duration-300 sm:px-6",
+        "fixed top-0 right-0 left-0 z-50 px-4 transition-all duration-300 sm:px-6",
         scrolled
           ? "backdrop-blur-sm"
           : "backdrop-blur-0"
       )}
+      style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 1rem)" }}
     >
       <div
         className={cn(

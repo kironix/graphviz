@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import localFont from "next/font/local"
 import { Config } from "@/config"
 import { Providers } from "@/providers"
@@ -33,6 +33,12 @@ export async function generateMetadata(): Promise<Metadata> {
     },
     manifest: "/site.webmanifest",
   }
+}
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
 }
 
 export default function RootLayout({

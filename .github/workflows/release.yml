@@ -214,6 +214,12 @@ jobs:
       - name: Initialize Android target
         run: bun run tauri:android:init
 
+      - name: Apply Android app icons
+        shell: bash
+        run: |
+          mkdir -p src-tauri/gen/android/app/src/main/res
+          cp -R src-tauri/icons/android/. src-tauri/gen/android/app/src/main/res/
+
       - name: Validate Android signing secrets
         env:
           ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}

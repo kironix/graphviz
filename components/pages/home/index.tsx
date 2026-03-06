@@ -115,7 +115,10 @@ export function Home() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <main className="relative overflow-hidden px-6 pt-24 pb-12 sm:px-8">
+      <main
+        className="relative overflow-hidden px-6 pb-12 sm:px-8"
+        style={{ paddingTop: "calc(env(safe-area-inset-top, 0px) + 6rem)" }}
+      >
         <div className="pointer-events-none absolute inset-x-0 top-0 h-136 bg-[radial-gradient(circle_at_top,oklch(0.6218_0.1029_214.69/0.16),transparent_55%)]" />
         <div className="pointer-events-none absolute top-28 -left-20 h-56 w-56 rounded-full bg-cyan-400/10 blur-3xl" />
         <div className="pointer-events-none absolute -right-16 bottom-20 h-64 w-64 rounded-full bg-sky-500/10 blur-3xl" />
