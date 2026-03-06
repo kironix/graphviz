@@ -88,7 +88,7 @@ jobs:
           if ! gh release view "$RELEASE_TAG" >/dev/null 2>&1; then
             gh release create "$RELEASE_TAG" \
               --title "GraphViz $RELEASE_TAG" \
-              --notes "Automated release for Windows, macOS, Linux, and Android." \
+              --notes "Automated release for Windows, Linux, and Android." \
               --draft
           fi
 
@@ -99,8 +99,6 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - runner: macos-latest
-            bundles: dmg
           - runner: ubuntu-24.04
             bundles: appimage
           - runner: windows-latest
@@ -150,7 +148,7 @@ jobs:
           tagName: ${{ needs.prepare-release.outputs.release_tag }}
           releaseName: GraphViz ${{ needs.prepare-release.outputs.release_tag }}
           releaseBody: |
-            Cross-platform release for Windows, macOS, Linux, and Android.
+            Cross-platform release for Windows, Linux, and Android.
 
             Tag: ${{ needs.prepare-release.outputs.release_tag }}
           releaseDraft: true
@@ -313,4 +311,4 @@ jobs:
             --draft=false \
             --latest \
             --title "GraphViz $RELEASE_TAG" \
-            --notes "Automated release for Windows, macOS, Linux, and Android."
+            --notes "Automated release for Windows, Linux, and Android."
