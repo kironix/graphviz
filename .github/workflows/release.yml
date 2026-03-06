@@ -249,8 +249,16 @@ jobs:
         run: |
           BUILD_FILE="src-tauri/gen/android/app/build.gradle.kts"
 
+          if ! grep -q '^import java.io.FileInputStream$' "$BUILD_FILE"; then
+            perl -0pi -e 's/\A/import java.io.FileInputStream\n/' "$BUILD_FILE"
+          fi
+
+          if ! grep -q '^import java.util.Properties$' "$BUILD_FILE"; then
+            perl -0pi -e 's/\A/import java.util.Properties\n/' "$BUILD_FILE"
+          fi
+
           if ! grep -q 'signingConfigs.getByName("release")' "$BUILD_FILE"; then
-            perl -0pi -e 's/\n(\s*)buildTypes \{/\n$1signingConfigs {\n$1    create("release") {\n$1        val keystorePropertiesFile = rootProject.file("keystore.properties")\n$1        val keystoreProperties = java.util.Properties()\n$1        if (keystorePropertiesFile.exists()) {\n$1            keystoreProperties.load(java.io.FileInputStream(keystorePropertiesFile))\n$1        }\n\n$1        keyAlias = keystoreProperties["keyAlias"] as String\n$1        keyPassword = keystoreProperties["keyPassword"] as String\n$1        storeFile = file(keystoreProperties["storeFile"] as String)\n$1        storePassword = keystoreProperties["storePassword"] as String\n$1    }\n$1}\n\n$1buildTypes {/s' "$BUILD_FILE"
+            perl -0pi -e 's/\n(\s*)buildTypes \{/\n$1signingConfigs {\n$1    create("release") {\n$1        val keystorePropertiesFile = rootProject.file("keystore.properties")\n$1        val keystoreProperties = Properties()\n$1        if (keystorePropertiesFile.exists()) {\n$1            keystoreProperties.load(FileInputStream(keystorePropertiesFile))\n$1        }\n\n$1        keyAlias = keystoreProperties["keyAlias"] as String\n$1        keyPassword = keystoreProperties["keyPassword"] as String\n$1        storeFile = file(keystoreProperties["storeFile"] as String)\n$1        storePassword = keystoreProperties["storePassword"] as String\n$1    }\n$1}\n\n$1buildTypes {/s' "$BUILD_FILE"
             perl -0pi -e 's/getByName\("release"\) \{(.*?)\n(\s*)\}/getByName("release") {\1\n$2    signingConfig = signingConfigs.getByName("release")\n$2}/s' "$BUILD_FILE"
           fi
 
